@@ -1,0 +1,10 @@
+[
+  {
+    "id": "0x859592A4A469610E573f96Ef87A0e5565F9a94c8",
+    "chain": "avalanche",
+    "name": "USDT/USDC",
+    "minPrice": 1,
+    "maxPrice": 1.0001,
+    "checkInterval": 3000
+  }
+]
