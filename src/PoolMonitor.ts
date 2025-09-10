@@ -32,9 +32,10 @@ export class PoolMonitor extends EventEmitter {
     public start() {
         if (this.interval) return;
         this.interval = setInterval(async () => {
-            const price = await this.getPoolPrice();
+            const pool = await this.getPool();
+            const price = parseFloat(pool.priceNative);
             if (price < this.minPrice || price > this.maxPrice) {
-                this.emit('priceOutOfRange', { id: this.id, price });
+                this.emit('priceOutOfRange', pool);
             }
         }, this.checkInterval);
     }
@@ -51,9 +52,8 @@ export class PoolMonitor extends EventEmitter {
         this.maxPrice = max;
     }
 
-    private async getPoolPrice(){
-        const response = await DexScreenerClient.getPair(this.chain, this.id);
-        return Number(response.priceNative) || 0;
+    private async getPool(){
+        return await DexScreenerClient.getPair(this.chain, this.id);
     }
 
     public getPoolInfo() {
