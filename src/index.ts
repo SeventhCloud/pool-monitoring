@@ -2,7 +2,9 @@ import { Telegraf, Telegram } from "telegraf";
 import { TelegramBot } from "./Bot";
 import { MonitorManager } from "./MonitorManager";
 
-process.loadEnvFile(".env");
+if(process.env.NODE_ENV !== 'production') {
+  process.loadEnvFile(".env");
+}
 
 console.log("Starting bot...", process.env.TELEGRAM_BOT_TOKEN);
 

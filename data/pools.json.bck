@@ -1,0 +1,18 @@
+[
+  {
+    "id": "0x859592A4A469610E573f96Ef87A0e5565F9a94c8",
+    "chain": "avalanche",
+    "name": "USDT/USDC",
+    "minPrice": 1,
+    "maxPrice": 1.0001,
+    "checkInterval": 3000
+  },
+  {
+    "id": "0x35521ec62d91375AC9510d1FeEFe254b4B582EA0",
+    "chain": "linea",
+    "name": "USDC/USDT",
+    "minPrice": 1,
+    "maxPrice": 1.0001,
+    "checkInterval": 3000
+  }
+]

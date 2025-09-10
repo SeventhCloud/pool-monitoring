@@ -19,8 +19,8 @@
     "id": "0x56EDd1F6c58d1C7839D6eDc0B2FBcC54068F1331",
     "name": "hwHLP/USDT0",
     "chain": "hyperevm",
-    "minPrice": 1.024,
-    "maxPrice": 1.02531,
-    "checkInterval": 300000
+    "minPrice": 1.02,
+    "maxPrice": 1.02,
+    "checkInterval": 3000
   }
 ]

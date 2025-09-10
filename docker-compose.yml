@@ -1,0 +1,12 @@
+services:
+  pool-bot:
+    build: .
+    container_name: pool-bot
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/app/logs
+    command: node dist/index.js
