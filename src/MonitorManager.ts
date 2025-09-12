@@ -1,9 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { PoolMonitor, PoolMonitorOptions } from "./PoolMonitor";
-
-
-
+import { hash } from "crypto";
 
 
 export class MonitorManager {
@@ -14,7 +12,7 @@ export class MonitorManager {
             const filePath = join(__dirname, "../data/pools.json"); // relative to compiled JS
             const data = readFileSync(filePath, "utf-8");
             const poolOptions = JSON.parse(data) as PoolMonitorOptions[];
-            poolOptions.forEach(option => this.monitors.set(option.id, new PoolMonitor(option)));
+            poolOptions.forEach(option => this.monitors.set(hash("sha256", option.id), new PoolMonitor(option)));
         } catch (error) {
             console.error("No Monitors found, continuing without Monitors", error);
         }
@@ -22,7 +20,7 @@ export class MonitorManager {
 
     public saveMonitors() {
         const data = Array.from(this.monitors.values()).map(monitor => ({
-            id: monitor.id,
+            id: monitor.getPoolInfo().poolId,
             name: monitor.getPoolInfo().name,
             chain: monitor.getPoolInfo().chain,
             minPrice: monitor.getPoolInfo().minPrice,

@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { DexScreenerClient } from './services/DexScreenerClient';
+import { hash } from 'crypto';
 
 export interface PoolMonitorOptions {
     id: string;
@@ -12,6 +13,7 @@ export interface PoolMonitorOptions {
 
 export class PoolMonitor extends EventEmitter {
     public id: string;
+    private poolId: string;
     private minPrice: number;
     private maxPrice: number;
     private chain: string;
@@ -21,7 +23,8 @@ export class PoolMonitor extends EventEmitter {
 
     constructor(options: PoolMonitorOptions) {
         super();
-        this.id = options.id;
+        this.id = hash("sha256", options.id);
+        this.poolId = options.id;
         this.name = options.name;
         this.chain = options.chain;
         this.minPrice = options.minPrice;
@@ -53,12 +56,13 @@ export class PoolMonitor extends EventEmitter {
     }
 
     private async getPool(){
-        return await DexScreenerClient.getPair(this.chain, this.id);
+        return await DexScreenerClient.getPair(this.chain, this.poolId);
     }
 
     public getPoolInfo() {
         return {
             id: this.id,
+            poolId: this.poolId,
             name: this.name,
             chain: this.chain,
             minPrice: this.minPrice,

@@ -8,19 +8,19 @@
     "checkInterval": 300000
   },
   {
-    "id": "0x35521ec62d91375AC9510d1FeEFe254b4B582EA0",
-    "name": "USDC/USDT",
-    "chain": "linea",
-    "minPrice": 0.9997,
-    "maxPrice": 0.9998,
-    "checkInterval": 300000
+    "id": "0x75b19237e8069600566be945953c5fd815cdfb26bd3972821d0ae8d6b7d5e51d",
+    "name": "SOL/USDC",
+    "chain": "unichain",
+    "minPrice": 276.59,
+    "maxPrice": 206.81,
+    "checkInterval": 3000
   },
   {
     "id": "0x56EDd1F6c58d1C7839D6eDc0B2FBcC54068F1331",
     "name": "hwHLP/USDT0",
     "chain": "hyperevm",
     "minPrice": 1.02,
-    "maxPrice": 1.02,
-    "checkInterval": 3000
+    "maxPrice": 1.02531,
+    "checkInterval": 300000
   }
 ]

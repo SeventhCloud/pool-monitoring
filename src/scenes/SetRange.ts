@@ -2,9 +2,11 @@ import { Markup, Scenes } from "telegraf";
 import { WizardScene } from "telegraf/scenes";
 import { MonitorManager } from "../MonitorManager";
 import { PoolMonitor } from "../PoolMonitor";
+import {hash} from "crypto"
+
 
 interface SetRangeState {
-  poolId: string;
+  chosenPoolId: string;
 }
 
 const setRangeWizard = (monitorManager: MonitorManager) => {
@@ -33,7 +35,7 @@ const setRangeWizard = (monitorManager: MonitorManager) => {
       }
 
       const chosenPoolId = ctx.update.callback_query.data;
-      (ctx.wizard.state as SetRangeState).poolId = chosenPoolId;
+      (ctx.wizard.state as SetRangeState).chosenPoolId = chosenPoolId;
 
       await ctx.answerCbQuery();
       await ctx.reply("Please enter the range (e.g., 1.001-1.0003):");
@@ -50,11 +52,11 @@ const setRangeWizard = (monitorManager: MonitorManager) => {
       }
 
       const [min, max] = input.split("-").map(parseFloat);
-      const pool: PoolMonitor = monitorManager.getPools().get(state.poolId)!;
+      const pool: PoolMonitor = monitorManager.getPools().get(state.chosenPoolId)!;
       pool.setRange(min, max);
 
       await ctx.reply(
-        `Range for pool "${state.poolId}" set to ${input}`
+        `Range for pool "${state.chosenPoolId}" set to ${input}`
       );
       monitorManager.saveMonitors();
 
