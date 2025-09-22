@@ -2,8 +2,6 @@ import { Markup, Scenes } from "telegraf";
 import { WizardScene } from "telegraf/scenes";
 import { MonitorManager } from "../MonitorManager";
 import { PoolMonitor } from "../PoolMonitor";
-import {hash} from "crypto"
-
 
 interface SetRangeState {
   chosenPoolId: string;
@@ -30,7 +28,9 @@ const setRangeWizard = (monitorManager: MonitorManager) => {
     // Step 1: Wait for pool selection
     async (ctx: any) => {
       if (!("callback_query" in ctx.update)) {
-        await ctx.reply("Please select a pool using the buttons above. Cancelling....");
+        await ctx.reply(
+          "Please select a pool using the buttons above. Cancelling...."
+        );
         return ctx.scene.leave();
       }
 
@@ -52,12 +52,12 @@ const setRangeWizard = (monitorManager: MonitorManager) => {
       }
 
       const [min, max] = input.split("-").map(parseFloat);
-      const pool: PoolMonitor = monitorManager.getPools().get(state.chosenPoolId)!;
+      const pool: PoolMonitor = monitorManager
+        .getPools()
+        .get(state.chosenPoolId)!;
       pool.setRange(min, max);
 
-      await ctx.reply(
-        `Range for pool "${state.chosenPoolId}" set to ${input}`
-      );
+      await ctx.reply(`Range for pool "${state.chosenPoolId}" set to ${input}`);
       monitorManager.saveMonitors();
 
       return ctx.scene.leave();
