@@ -13,6 +13,7 @@ export interface PoolMonitorOptions {
 }
 
 export class PoolMonitor extends EventEmitter {
+  static intervalDelay = 0;
   public id: string;
   private poolId: string;
   private minPrice: number;
@@ -30,7 +31,7 @@ export class PoolMonitor extends EventEmitter {
     this.chain = options.chain;
     this.minPrice = options.minPrice;
     this.maxPrice = options.maxPrice;
-    this.checkInterval = options.checkInterval ?? 10000;
+    this.checkInterval = (options.checkInterval ?? 10000) + ++PoolMonitor.intervalDelay * 100;
   }
 
   public start() {

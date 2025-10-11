@@ -1,18 +1,26 @@
 [
   {
-    "id": "0x859592A4A469610E573f96Ef87A0e5565F9a94c8",
-    "name": "USDT/USDC",
-    "chain": "avalanche",
-    "minPrice": 1.0008,
-    "maxPrice": 1.0009,
-    "checkInterval": 300000
-  },
-  {
     "id": "0x75b19237e8069600566be945953c5fd815cdfb26bd3972821d0ae8d6b7d5e51d",
     "name": "SOL/USDC",
     "chain": "unichain",
-    "minPrice": 206.81,
-    "maxPrice": 276.59,
+    "minPrice": 161.5,
+    "maxPrice": 218.5,
+    "checkInterval": 300000
+  },
+  {
+    "id": "0x09666EAF650DC52cece84B1bcD2dd78997D239c7",
+    "name": "mUSD/USDC",
+    "chain": "linea",
+    "minPrice": 1,
+    "maxPrice": 1.0001,
+    "checkInterval": 300000
+  },
+  {
+    "id": "0x5AF652d03a7151fC233Fde83a0f8217Fff7cFdfB",
+    "name": "sUSDe/USDC",
+    "chain": "avalanche",
+    "minPrice": 1.199,
+    "maxPrice": 1.19912,
     "checkInterval": 300000
   }
 ]
