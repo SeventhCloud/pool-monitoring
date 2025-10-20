@@ -55,6 +55,7 @@ export class MonitorManager {
   }
 
   public removeMonitor(poolHashID: string) {
+    this.monitors.get(poolHashID)?.stop();
     const result = this.monitors.delete(poolHashID);
     this.saveMonitors();
     return result;

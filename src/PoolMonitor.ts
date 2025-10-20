@@ -46,6 +46,7 @@ export class PoolMonitor extends EventEmitter {
   }
 
   public stop() {
+    this.stop();
     if (this.interval) {
       clearInterval(this.interval);
       this.interval = null;
