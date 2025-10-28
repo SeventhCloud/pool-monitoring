@@ -31,7 +31,8 @@ export class PoolMonitor extends EventEmitter {
     this.chain = options.chain;
     this.minPrice = options.minPrice;
     this.maxPrice = options.maxPrice;
-    this.checkInterval = (options.checkInterval ?? 10000) + ++PoolMonitor.intervalDelay * 100;
+    this.checkInterval = (options.checkInterval ?? 10000) + ++PoolMonitor.intervalDelay * 2000;
+    console.log(`PoolMonitor for ${this.name} will check every ${this.checkInterval} ms`);
   }
 
   public start() {
@@ -46,10 +47,10 @@ export class PoolMonitor extends EventEmitter {
   }
 
   public stop() {
-    this.stop();
     if (this.interval) {
       clearInterval(this.interval);
       this.interval = null;
+      this.removeAllListeners();
     }
   }
 

@@ -5,22 +5,22 @@
     "chain": "unichain",
     "minPrice": 161.5,
     "maxPrice": 218.5,
-    "checkInterval": 300400
-  },
-  {
-    "id": "0x09666EAF650DC52cece84B1bcD2dd78997D239c7",
-    "name": "mUSD/USDC",
-    "chain": "linea",
-    "minPrice": 0.999,
-    "maxPrice": 0.9991,
-    "checkInterval": 300800
+    "checkInterval": 300000
   },
   {
     "id": "0xA0926801A2abC718822a60d8Fa1bc2A51Fa09F1e",
     "name": "WXPL/USDT0",
     "chain": "plasma",
-    "minPrice": 0.353,
-    "maxPrice": 0.483,
-    "checkInterval": 301200
+    "minPrice": 0.3326,
+    "maxPrice": 0.44719,
+    "checkInterval": 300000
+  },
+  {
+    "id": "0xB3cF80E7E3988705E45F5EA1Cf0Be8a50fA8Af17",
+    "name": "USDT/USDC.e",
+    "chain": "abstract",
+    "minPrice": 1.0003,
+    "maxPrice": 1.0004,
+    "checkInterval": 300000
   }
 ]
