@@ -9,11 +9,9 @@ export interface PoolMonitorOptions {
   name: string;
   minPrice: number;
   maxPrice: number;
-  checkInterval?: number;
 }
 
-export class PoolMonitor extends EventEmitter {
-  static intervalDelay = 0;
+export class PoolMonitor {
   public id: string;
   private poolId: string;
   private minPrice: number;
@@ -21,37 +19,14 @@ export class PoolMonitor extends EventEmitter {
   private chain: string;
   private name: string;
   private interval: NodeJS.Timeout | null = null;
-  private checkInterval: number;
 
   constructor(options: PoolMonitorOptions) {
-    super();
     this.id = hash("sha256", options.id);
     this.poolId = options.id;
     this.name = options.name;
     this.chain = options.chain;
     this.minPrice = options.minPrice;
     this.maxPrice = options.maxPrice;
-    this.checkInterval = (options.checkInterval ?? 10000) + ++PoolMonitor.intervalDelay * 2000;
-    console.log(`PoolMonitor for ${this.name} will check every ${this.checkInterval} ms`);
-  }
-
-  public start() {
-    if (this.interval) return;
-    this.interval = setInterval(async () => {
-      const pool = await this.getPool();
-      const price = parseFloat(pool.priceNative);
-      if (price < this.minPrice || price > this.maxPrice) {
-        this.emit("priceOutOfRange", pool);
-      }
-    }, this.checkInterval);
-  }
-
-  public stop() {
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-      this.removeAllListeners();
-    }
   }
 
   public setRange(min: number, max: number) {
@@ -59,7 +34,7 @@ export class PoolMonitor extends EventEmitter {
     this.maxPrice = max;
   }
 
-  private async getPool() {
+  public async getLivePool() {
     return await DexScreenerClient.getPair(this.chain, this.poolId) as DexPair;
   }
 
@@ -70,8 +45,7 @@ export class PoolMonitor extends EventEmitter {
       name: this.name,
       chain: this.chain,
       minPrice: this.minPrice,
-      maxPrice: this.maxPrice,
-      checkInterval: this.checkInterval,
+      maxPrice: this.maxPrice
     };
   }
 }

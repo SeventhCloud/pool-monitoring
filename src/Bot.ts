@@ -3,9 +3,10 @@ import { Stage, WizardContext } from "telegraf/scenes";
 import { session } from "telegraf/session";
 import { MonitorManager } from "./MonitorManager";
 import { DexPair } from "./models/DexScreenerModels";
-import removePoolWizard from "./scenes/RemovePool";
-import setRangeWizard from "./scenes/SetRange";
 import addPoolWizard from "./scenes/AddPool";
+import removePoolWizard from "./scenes/RemovePool";
+import setIntervalWizard from "./scenes/SetInterval";
+import setRangeWizard from "./scenes/SetRange";
 import getStatusWizard from "./scenes/StatusScene";
 
 export class TelegramBot {
@@ -36,6 +37,7 @@ export class TelegramBot {
       removePoolWizard(this.monitorManager),
       addPoolWizard(this.monitorManager),
       getStatusWizard(this.monitorManager),
+      setIntervalWizard(this.monitorManager)
     ]);
     this.bot.use(session()); // Required for scenes
     this.bot.use(scenes.middleware());
@@ -75,6 +77,12 @@ export class TelegramBot {
       });
     });
 
+    this.bot.command("setinterval", (ctx) => {
+      return ctx.scene.enter("set-interval-wizard", {
+        pools: this.monitorManager.getPools(),
+      });
+    });
+
     this.bot.help((ctx) => ctx.reply("Send me a sticker"));
     process.once("SIGINT", () => this.bot.stop("SIGINT"));
     process.once("SIGTERM", () => this.bot.stop("SIGTERM"));
@@ -83,12 +91,9 @@ export class TelegramBot {
   setupListeners() {
     this.allowedUsers.forEach((userId) => {
       console.log(`Setting up listeners for user: ${userId}`);
-      this.monitorManager.listMonitors().forEach((monitor) => {
-        monitor.on("priceOutOfRange", (pool) =>
-          this.handlePriceOutOfRange(userId, pool)
-        );
-        monitor.start();
-      });
+      this.monitorManager.poolNotifier.on("priceOutOfRange", (pool) =>
+        this.handlePriceOutOfRange(userId, pool)
+      );
     });
   }
 

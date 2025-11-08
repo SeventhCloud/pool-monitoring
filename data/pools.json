@@ -1,26 +1,23 @@
 [
   {
-    "id": "0x75b19237e8069600566be945953c5fd815cdfb26bd3972821d0ae8d6b7d5e51d",
-    "name": "SOL/USDC",
-    "chain": "unichain",
-    "minPrice": 161.5,
-    "maxPrice": 218.5,
-    "checkInterval": 300000
-  },
-  {
     "id": "0xA0926801A2abC718822a60d8Fa1bc2A51Fa09F1e",
     "name": "WXPL/USDT0",
     "chain": "plasma",
-    "minPrice": 0.3326,
-    "maxPrice": 0.44719,
-    "checkInterval": 300000
+    "minPrice": 0.28855,
+    "maxPrice": 0.3899
   },
   {
     "id": "0xB3cF80E7E3988705E45F5EA1Cf0Be8a50fA8Af17",
     "name": "USDT/USDC.e",
     "chain": "abstract",
-    "minPrice": 1.0003,
-    "maxPrice": 1.0004,
-    "checkInterval": 300000
+    "minPrice": 1,
+    "maxPrice": 1.0001
+  },
+  {
+    "id": "0x4B655692D5B5199273C116b2e72b4C584CD81e94",
+    "name": "USDC/USD₮0",
+    "chain": "hyperevm",
+    "minPrice": 1.0004,
+    "maxPrice": 1.0005
   }
 ]
